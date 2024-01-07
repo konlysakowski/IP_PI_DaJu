@@ -16,8 +16,8 @@ private:
         char correctOption;
     };
 
-    vector<Question> allQuestions; // Pula 20 pytañ
-    vector<Question> selectedQuestions; // Pytania wybrane do gry
+    vector<Question> allQuestions; 
+    vector<Question> selectedQuestions; 
     int currentQuestion;
     int moneyWon;
 
@@ -27,15 +27,12 @@ private:
 
 public:
     MillionaireGame() : currentQuestion(0), moneyWon(0) {
-        // Inicjalizacja pytañ
         initializeAllQuestions();
         selectRandomQuestions();
     }
 
 
     void initializeAllQuestions() {
-        // Dodaj 20 pytañ wraz z odpowiedziami i poprawnymi odpowiedziami
-        // Przyk³ad:
         Question q1 = { "Gdzie Œl¹zaczki nosz¹ laczki?", {"A. Na g³owie", "B. Na rêkach", "C. Na nogach", "D. Na plecach"}, 'C' };
         allQuestions.push_back(q1);
         Question q2 = { "Ragdoll, czyli szmaciana lalka, to rasa...", {"A. Kotów", "B. Psów", "C. Królików", "D. Chomików"}, 'A' };
@@ -77,12 +74,11 @@ public:
         Question q20 = { "Kto zdoby³ Z³ot¹ Pi³kê w 2018 roku?", {"A. Lionel Messi", "B. Cristiano Ronaldo", "C. Robert Lewandowski", "D. Luka Modriæ"}, 'D' };
         allQuestions.push_back(q20);
 
-        // Permutuj pytania, aby zmieniæ ich kolejnoœæ
+
         random_shuffle(allQuestions.begin(), allQuestions.end());
     }
 
     void selectRandomQuestions() {
-        // Wybierz losowo 10 pytañ do gry
         selectedQuestions.clear();
         for (int i = 0; i < 10 && i < allQuestions.size(); ++i) {
             selectedQuestions.push_back(allQuestions[i]);
@@ -97,8 +93,6 @@ public:
     }
 
     void FiftyFifty() {
-        // Ko³o ratunkowe pó³ na pó³
-        // Usuwa dwie b³êdne odpowiedzi
         vector<char> availableOptions = { 'A', 'B', 'C', 'D' };
         availableOptions.erase(remove(availableOptions.begin(), availableOptions.end(), selectedQuestions[currentQuestion].correctOption), availableOptions.end());
         random_shuffle(availableOptions.begin(), availableOptions.end());
@@ -114,19 +108,14 @@ public:
     }
 
     void SwapQuestion() {
-        // Ko³o ratunkowe "Zamiana pytania"
-        // Zamienia obecne pytanie na inne z puli
         cout << "Zamiana pytania! Oto nowe pytanie:" << endl;
         int newIndex = rand() % allQuestions.size();
         selectedQuestions[currentQuestion] = allQuestions[newIndex];
     }
 
     void AudienceHelp() {
-        // Ko³o ratunkowe "Pytanie do publicznoœci"
-        // Wskazuje poprawn¹ odpowiedŸ na podstawie sztucznej inteligencji publicznoœci
-        // (Losowo wybiera, ale dla uproszczenia)
         cout << "Publicznoœæ myœli..." << endl;
-        int correctPercentage = rand() % 51 + 50; // Losowo wybierz od 50% do 100%
+        int correctPercentage = rand() % 51 + 50;
         int incorrectPercentage = 100 - correctPercentage;
 
         cout << "A: " << (selectedQuestions[currentQuestion].correctOption == 'A' ? correctPercentage : incorrectPercentage) << "%   "
@@ -172,7 +161,7 @@ public:
                 ++currentQuestion;
                 if (currentQuestion == selectedQuestions.size()) {
                     cout << "Gratulacje! Wygra³eœ ca³¹ grê!" << endl;
-                    return false; // Koniec gry
+                    return false; 
                 }
                 return true;
             }
@@ -186,14 +175,14 @@ public:
     }
 
     int calculatePrize() {
-        // Przyk³adowa funkcja do obliczenia wygranej w zale¿noœci od pytania
         return 1000 * (currentQuestion + 1);
     }
 };
 
 int main() {
+
     setlocale(LC_ALL, "");
-    srand(time(0)); // Inicjalizacja generatora liczb losowych
+    srand(time(0)); 
     MillionaireGame game;
     char userAnswer;
 

@@ -194,8 +194,8 @@ int main() {
         cin >> userAnswer;
         userAnswer = toupper(userAnswer);
     } while (game.answerQuestion(userAnswer));
-     
-
+   
+    
     return 0;
 }
 
